@@ -1,29 +1,28 @@
-// Przetwarzanie wysyłania formularza form.login-form powinno odbywać się poprzez zdarzenie submit.
-// Podczas wysyłania formularza strona nie powinna być przeładowywana.
-// Jeśli podczas submit w formularzu są nieuzupełnione pola, wyświetl alert z komunikatem 'All form fields must be filled in'. Nie dodawaj atrybutu required do inputów, walidacja powinna odbywać się za pomocą JS.
-// Jeśli użytkownik wypełnił wszystkie pola i wysłał formularz, zbierz wartości pól do obiektu z dwoma właściwościami, gdzie kluczem jest nazwa inputów, a wartością są odpowiednie wartości tych inputów, oczyszczone z białych znaków na krawędziach. Do uzyskania dostępu do elementów formularza użyj właściwości elements.
-// Przy submit formularza wypisz obiekt z wprowadzonymi danymi w konsoli i zresetuj wartości pól formularza za pomocą metody reset.
+// Напиши скрипт управління формою логіна.
+// 1. відправлення форми form.login-form повинна відбуватися за подією submit.
+// 2. Під час відправлення форми сторінка не повинна перезавантажуватися. = preventDefault()
+// 3. Якщо при сабміті у формі є незаповнені поля, виводь alert з попередженням про те, що 'All form fields must be filled in'. Не додавай на інпути атрибут required, валідація має відбуватися саме через JS.
+// 4. Якщо користувач заповнив усі поля і відправив форму, збери значення полів в об'єкт з двома властивостями, де ключ — це ім'я інпутів, а значення — відповідні значення цих інпутів, очищені від пробілів по краях. Для доступу до елементів форми використовуй властивість elements.
+// 5. При сабміті форми виведи об'єкт із введеними даними в консоль і очисти значення полів форми методом reset.
 
+// 1. Find required elements
+const formEl = document.querySelector("form.login-form");
 
-const registerForm = document.querySelector(".login-form");
-
-registerForm.addEventListener("submit", submitForm);
-
-function submitForm(event) {
+// 2. Send form by Submit, prevent from reload, collect data in array
+const submitForm = formEl.addEventListener("submit", event => {
     event.preventDefault();
-    const form = event.target;
-    const email = form.elements.email.value.trim();
-    const password = form.elements.password.value.trim();
+    var userData = {};
+    const email = formEl.elements.email.value;
+    const password = formEl.elements.password.value;
 
-    if (!email || !password){
-        alert("All form fields must be filled in");
-        return;
+    if (email == '' || password == '') {
+        alert('All form fields must be filled in');
+    } else {
+        userData.email = email.trim();
+        userData.password = password.trim();
+        console.log(userData)
+        formEl.elements.email.value = "";
+        formEl.elements.password.value = "";
     }
-        const newUser = {
-            email,
-            password,
-        };
+});
 
-    console.log(newUser);
-    form.reset();
-}

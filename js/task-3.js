@@ -1,13 +1,21 @@
-//Napisz skrypt, który podczas wprowadzania tekstu do inputu input#name-input (zdarzenie input) podstawia jego bieżącą wartość do span#name-output jako imię do powitania. Upewnij się, że wartość w inpucie jest oczyszczana z białych znaków na krańcach. Jeśli input jest pusty lub zawiera tylko spacje, to zamiast imienia w spanie powinien pojawić się ciąg "Anonymous".
+// Напиши скрипт, який під час набору тексту в інпуті input#name-input (подія input) підставляє його поточне значення в span#name-output як ім’я для привітання. Обов’язково очищай значення в інпуті по краях від пробілів . Якщо інпут порожній або містить лише пробіли, то замість імені у спан має підставлятися рядок "Anonymous".
 
-const textInput = document.querySelector("#name-input");
-const output = document.querySelector("#name-output");
+// 1. Find elements in DOM
+const inputEl = document.querySelector("input#name-input");
 
-textInput.addEventListener("input", (event) => {
-    if (textInput.value.trim() === "") {
-        output.textContent = "Anonymous"
-    }
-    else {
-  output.textContent = event.currentTarget.value.trim();
+const outputEl = document.querySelector("span#name-output");
+
+// *See entered key in console
+// console.dir(outputEl)
+
+// 2. Track input event
+const onKeyupInput = inputEl.addEventListener("keyup", item => {
+    // console.log(item.key);
+    console.dir(inputEl.value)
+
+    if (inputEl.value == null || inputEl.value.trim() == "") {
+    outputEl.innerHTML = "Anonymous";
+    } else {
+    outputEl.innerHTML = inputEl.value.trim();
     }
 });

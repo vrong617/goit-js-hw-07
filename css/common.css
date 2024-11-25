@@ -14,8 +14,24 @@ body {
 }
 
 ul {
-  list-style-type: none;
+  list-style: none;
+}
+
+img {
+  width: 100%;
+}
+
+.gallery {
   display: flex;
-  flex-direction: column;
+  max-width: 1128px;
+  flex-wrap: wrap;
+  row-gap: 48px;
+  column-gap: 24px;
+}
+
+.gallery-item {
+  display: flex;
+  justify-content: center;
   align-items: center;
+  max-width: 360px;
 }

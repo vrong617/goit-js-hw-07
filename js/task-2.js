@@ -1,45 +1,65 @@
 const images = [
   {
-    url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&h=750&w=1260",
-    alt: "White and Black Long Fur Cat",
+    url: 'https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    alt: 'White and Black Long Fur Cat',
   },
   {
-    url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?dpr=2&h=750&w=1260",
-    alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+    url: 'https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    alt: 'Orange and White Koi Fish Near Yellow Koi Fish',
   },
   {
-    url: "https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?dpr=2&h=750&w=1260",
-    alt: "Group of Horses Running",
+    url: 'https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+    alt: 'Group of Horses Running',
   },
   {
-    url: "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg",
-    alt: "Alpine Spring Meadows",
+    url:
+      'https://images.pexels.com/photos/66898/elephant-cub-tsavo-kenya-66898.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    alt: 'Elephant Beside on Baby Elephant',
   },
   {
-    url: "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg",
-    alt: "Nature Landscape",
+    url:
+      'https://images.pexels.com/photos/37833/rainbow-lorikeet-parrots-australia-rainbow-37833.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    alt: 'Blue Geeen and Orange Parrot',
   },
   {
-    url: "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
-    alt: "Lighthouse Coast Sea",
-  }
+    url:
+      'https://images.pexels.com/photos/247376/pexels-photo-247376.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
+    alt: 'Zebras on Zebra',
+  },
 ];
 
-// Napisz skrypt tworzący galerię obrazów na podstawie tablicy danych. HTML zawiera listę ul.gallery.
 
-// Wykorzystaj tablicę obiektów images do utworzenia elementów <img>, umieszczonych wewnątrz <li>.
+// 01. create image card function
+const createGalleryCard = (item) => {
 
-// Możesz utworzyć i dodać elementy HTML za pomocą document.createElement() i elem.append(), lub szablonów ciągów i elem.insertAdjacentHTML().
+  // 1.1 create li
+  const galleryLiEl = document.createElement("li");
+  galleryLiEl.classList.add("gallery-item")
 
-// Wszystkie elementy galerii powinny być dodawane do DOM w jednej operacji dodawania.
-// Dodaj minimalne stylizowanie galerii za pomocą flexboxów za pomocą klas CSS.
+  // 1.2 create image
+  const galleryImgEl = document.createElement("img");
+  galleryImgEl.classList.add("gallery-image")
 
-const gallery = document.querySelector(".gallery");
+  galleryImgEl.src = item.url;
+  galleryImgEl.alt = item.alt;
+  galleryImgEl.width = 360;
 
-const galleryMarkup = images
-  .map(
-    ({url, alt}) => `<li><img src="${url}" alt="${alt}"></li>`)
-  .join("");
+  // 1.3 place image inside li
+  galleryLiEl.append(galleryImgEl);
 
-gallery.insertAdjacentHTML("beforeend", galleryMarkup);
+  // 1.4 return final structure
+  return galleryLiEl
+}
 
+// 2. Create new array based on images using function 01
+const galleryArray = images
+  .slice(0,3)
+  .map(el => createGalleryCard(el));
+// console.log(galleryArray)
+
+// 3. find Gallery
+const galleryUlEl = document.querySelector("ul.gallery");
+
+// 4. Insert in HTML
+galleryUlEl.append(...galleryArray);
+// console.log(galleryUlEl);

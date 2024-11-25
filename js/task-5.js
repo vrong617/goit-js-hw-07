@@ -1,21 +1,21 @@
+// Напиши скрипт, який змінює колір фону елемента <body> через інлайн-стиль по кліку на button.change-color і задає це значення кольору текстовим вмістом для span.color.
+
+// Click button:
+// change bg color to newColor
+// set newColor to span
+
 function getRandomHexColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
     .padStart(6, 0)}`;
 }
 
+// 1. Find element
+const buttonEl = document.querySelector(".change-color");
+const bodyEl = document.querySelector("body");
 
-//Napisz skrypt, który po kliknięciu na button.change-color zmienia kolor tła elementu <body>
-// za pomocą stylu inline
-// i przypisuje tę wartość koloru do span.color.
-
-const changeButton = document.querySelector(".change-color");
-const colorSpan = document.querySelector(".color");
-
-function randomColor() {
-  const newColor = getRandomHexColor();
-  document.body.style.backgroundColor = newColor;
-  colorSpan.textContent = newColor;
-};
-
-changeButton.addEventListener("click", randomColor);
+// 2. Set listener
+buttonEl.addEventListener("click", event => {
+  bodyEl.style.backgroundColor = getRandomHexColor();
+  buttonEl.previousElementSibling.children[0].textContent = getRandomHexColor();
+});

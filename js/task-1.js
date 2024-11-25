@@ -1,19 +1,15 @@
-// Z wykorzystaniem właściwości i metod elementów DOM napisz skrypt, który:
+// З використанням властивостей і методів DOM-елементів, напиши скрипт, який:
 
-// 1 Policzy i wypisze w konsoli liczbę kategorii w ul#categories, czyli elementów li.item.
-// 2 Dla każdego elementu li.item na liście ul#categories znajdzie i wypisze w konsoli tekst nagłówka elementu (tagu <h2>) oraz liczbę elementów w kategorii (wszystkich <li>, które są w nim zagnieżdżone).
+// Порахує й виведе в консоль кількість категорій в ul#categories, тобто елементів li.item.
+// Для кожного елемента li.item у списку ul#categories знайде й виведе в консоль текст заголовка елемента (тегу <h2>) і кількість елементів у категорії (усіх <li>, вкладених у нього).
 
-const categoriesList = document.querySelector("#categories");
-const categoriesItems = categoriesList.querySelectorAll(".item");
+const listItem = document.querySelectorAll(".item");
+console.log(`Number of categories: ${listItem.length}`);
 
-console.log(`Number of categories: ${categoriesItems.length}`);
+const categoryTitle = listItem.forEach((element) => {
+    // Title text value
+    console.log(`Category: ${element.children[0].textContent}`);
 
-categoriesItems.forEach((item) => {
-    // h2
-    const categoriesName = item.querySelector("h2").textContent; 
-    // zlicz
-    const liCount = item.querySelectorAll("ul li").length;
-    console.log(`Category: ${categoriesName}`);
-    console.log(`Elements: ${liCount}`);
-  });
-
+    // Number of li items inside ul
+    console.log(`Elements: ${element.children[1].children.length}`);
+});
